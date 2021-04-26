@@ -35,18 +35,17 @@ class LoginActivity : AppCompatActivity() {
             Backendless.UserService.login(username, password, object: AsyncCallback<BackendlessUser> {
 
                 override fun handleFault(fault: BackendlessFault?) {
-
                     Toast.makeText(this@LoginActivity, "Something went wrong, check the logs.", Toast.LENGTH_SHORT).show()
                     Log.d(TAG, "handleFault: " + fault?.message)
-
                 }
 
                 override fun handleResponse(response: BackendlessUser?) {
-
                     Toast.makeText(this@LoginActivity, "${response?.userId} has logged in.", Toast.LENGTH_SHORT).show()
-                    //startActivity()
-                    finish()
 
+                    val loginIntent = Intent(this@LoginActivity, HomePage::class.java)
+                    startActivity(loginIntent)
+                    //to close the login screen so it's not there when user clicks bacc
+                    finish()
                 }
 
             })
@@ -54,7 +53,25 @@ class LoginActivity : AppCompatActivity() {
         }
 
         button_login_createAccount.setOnClickListener {
+            val username = editText_login_username.text.toString()
+            val password = editText_login_password.text.toString()
 
+            Backendless.UserService.login(username, password, object: AsyncCallback<BackendlessUser> {
+                override fun handleFault(fault: BackendlessFault?) {
+                    Toast.makeText(this@LoginActivity, "Something went wrong, check the logs.", Toast.LENGTH_SHORT).show()
+                    Log.d(TAG, "handleFault: " + fault?.message)
+                }
+
+                override fun handleResponse(response: BackendlessUser?) {
+                    Toast.makeText(this@LoginActivity, "${response?.userId} has logged in.", Toast.LENGTH_SHORT).show()
+
+                    val loginIntent = Intent(this@LoginActivity, HomePage::class.java)
+                    startActivity(loginIntent)
+                    //to close the login screen so it's not there when user clicks bacc
+                    finish()
+                }
+
+            })
         }
     }
 }
