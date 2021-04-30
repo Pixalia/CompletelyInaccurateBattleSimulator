@@ -45,7 +45,7 @@ class LoginActivity : AppCompatActivity() {
                     val loginIntent = Intent(this@LoginActivity, HomePage::class.java)
                     startActivity(loginIntent)
                     //to close the login screen so it's not there when user clicks bacc
-                    finish()
+                    //finish()
                 }
 
             })
@@ -53,25 +53,30 @@ class LoginActivity : AppCompatActivity() {
         }
 
         button_login_createAccount.setOnClickListener {
+
             val username = editText_login_username.text.toString()
             val password = editText_login_password.text.toString()
 
-            Backendless.UserService.login(username, password, object: AsyncCallback<BackendlessUser> {
-                override fun handleFault(fault: BackendlessFault?) {
-                    Toast.makeText(this@LoginActivity, "Something went wrong, check the logs.", Toast.LENGTH_SHORT).show()
-                    Log.d(TAG, "handleFault: " + fault?.message)
-                }
+            val registrationIntent = Intent(this, RegistrationActivity::class.java).apply {
 
-                override fun handleResponse(response: BackendlessUser?) {
-                    Toast.makeText(this@LoginActivity, "${response?.userId} has logged in.", Toast.LENGTH_SHORT).show()
+                putExtra(EXTRA_USERNAME, username)
+                putExtra(EXTRA_PASSWORD, password)
+            }
 
-                    val loginIntent = Intent(this@LoginActivity, HomePage::class.java)
-                    startActivity(loginIntent)
-                    //to close the login screen so it's not there when user clicks bacc
-                    finish()
-                }
+            startActivityForResult(registrationIntent, 1)
+        }
 
-            })
+
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        //accountMade = data?.getBooleanExtra(RegistrationActivity.CREATION_SUCCESS, false)!!
+        if (requestCode == 1) {
+            val createdUsername = data?.getStringExtra(RegistrationActivity.CREATED_USERNAME)
+            val createdPassword = data?.getStringExtra(RegistrationActivity.CREATED_PASSWORD)
+            editText_login_username.setText(createdUsername)
+            editText_login_password.setText(createdPassword)
         }
     }
 }

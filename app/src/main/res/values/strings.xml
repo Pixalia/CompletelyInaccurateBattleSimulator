@@ -4,4 +4,7 @@
     <string name="password">Password</string>
     <string name="login">Login</string>
     <string name="createAccount">Create an account</string>
+    <string name="email">Email</string>
+    <string name="confirmPassword">Confirm Password</string>
+    <string name="returnTo">Return to login</string>
 </resources>
