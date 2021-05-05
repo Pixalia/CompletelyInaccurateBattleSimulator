@@ -7,4 +7,9 @@
     <string name="email">Email</string>
     <string name="confirmPassword">Confirm Password</string>
     <string name="returnTo">Return to login</string>
+    <string name="creationTitle">Create your character!</string>
+    <string name="strength">Strength:</string>
+    <string name="dexterity">Dexterity:</string>
+    <string name="intelligence">Intelligence:</string>
+    <string name="luck">Luck:</string>
 </resources>
