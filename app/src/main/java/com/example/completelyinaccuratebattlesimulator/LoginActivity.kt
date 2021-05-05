@@ -42,10 +42,21 @@ class LoginActivity : AppCompatActivity() {
                 override fun handleResponse(response: BackendlessUser?) {
                     Toast.makeText(this@LoginActivity, "${response?.userId} has logged in.", Toast.LENGTH_SHORT).show()
 
-                    val loginIntent = Intent(this@LoginActivity, HomePage::class.java)
-                    startActivity(loginIntent)
-                    //to close the login screen so it's not there when user clicks bacc
-                    //finish()
+                    Log.d(TAG, response?.getProperty("createdCharacter").toString())
+
+                    if (response?.getProperty("createdCharacter") == true){
+                        val loginIntent = Intent(this@LoginActivity, HomePage::class.java)
+                        startActivity(loginIntent)
+                        //to close the login screen so it's not there when user clicks bacc
+                        finish()
+                    }
+                    else{
+                        val loginIntent = Intent(this@LoginActivity, CreationActivity::class.java)
+                        startActivity(loginIntent)
+                        finish()
+                    }
+
+
                 }
 
             })
