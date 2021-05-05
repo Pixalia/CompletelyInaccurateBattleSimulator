@@ -42,7 +42,7 @@ class RegistrationActivity : AppCompatActivity() {
             else if (editText_registration_confirmPassword.text.isNullOrEmpty()){
                 Toast.makeText(this, "Please confirm your password", Toast.LENGTH_SHORT).show()
             }
-            else if (editText_registration_password.text.toString().compareTo((editText_registration_confirmPassword.text.toString())) == 0){
+            else if (editText_registration_password.text.toString() !== editText_registration_confirmPassword.text.toString()) {
                 Toast.makeText(this, "Passwords do not match", Toast.LENGTH_SHORT).show()
             }
             else{
