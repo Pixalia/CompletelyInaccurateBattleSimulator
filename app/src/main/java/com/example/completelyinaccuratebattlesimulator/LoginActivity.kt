@@ -19,6 +19,7 @@ class LoginActivity : AppCompatActivity() {
         val EXTRA_PASSWORD = "password"
         val REQUEST_LOGIN_INFO = "login"
         val TAG = "LOGINACTIVITY"
+        val USER = "user"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

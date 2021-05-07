@@ -12,4 +12,6 @@
     <string name="dexterity">Dexterity:</string>
     <string name="intelligence">Intelligence:</string>
     <string name="luck">Luck:</string>
+    <string name="createCharacter">Create Character</string>
+    <string name="backToMain">Return to Main Menu</string>
 </resources>
