@@ -14,4 +14,21 @@
     <string name="luck">Luck:</string>
     <string name="createCharacter">Create Character</string>
     <string name="backToMain">Return to Main Menu</string>
+    <string name="limit">Warning: Stats MUST add up to 12</string>
+    <string name="powerSpeech">Insert Speech Here</string>
+    <string name="zhugeLiangSpeech">"There is no greater weapon than a prepared mind." -Zhuge Liang"</string>
+    <string name="sunTzuSpeech">"If you know the enemy and know yourself you need not fear the result of a hundred battle." -Sun Tzu</string>
+    <string name="genghisKhanSpeech">"If you're afraid - don't do it, - if you're doing it - don't be afraid!" -Genghis Khan</string>
+    <string name="alexanderSpeech">"There is nothing impossible to him who will try." -Alexander the Great</string>
+    <string name="napoleonSpeech">"Victory belongs to the most persevering." -Napoleon Bonaparte</string>
+    <string name="caesarSpeech">"Experience is the teacher of all things." -Julius Caesar</string>
+    <string name="caoCaoSpeech">"What is at a peak is certain to decline. He who shows his hand will certainly be defeated. He who can prevail in battle by taking advantage of his enemy's doubts is invincible." -Cao Cao</string>
+    <string name="hannibalBarcaSpeech">"I will either find a way or make one." - Hannibal Barca</string>
+    <string name="pattonSpeech">"Take calculated risks. That is quite different from being rash." -George Patton</string>
+    <string name="rommelSpeech">"In a man-to-man fight, the winner is he who has one more round in his magazine." -Erwin Rommel</string>
+    <string name="upgradeAnnouncement">In light of your recent victories, you are now capable of wielding greater power.</string>
+    <string name="tooLongDidNotRead">Select a stat to increase.</string>
+    <string name="current">Currently Selected: None</string>
+    <string name="confirm">Confirm</string>
+    <string name="relent">Relent</string>
 </resources>
