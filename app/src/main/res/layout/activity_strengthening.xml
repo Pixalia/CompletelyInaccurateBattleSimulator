@@ -49,47 +49,47 @@
 
     <ImageView
         android:id="@+id/imageView_strength_strength"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:layout_marginTop="25dp"
         app:layout_constraintEnd_toStartOf="@+id/imageView_strength_dexterity"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline4"
-        tools:srcCompat="@tools:sample/avatars" />
+        android:src="@drawable/redsword" />
 
     <ImageView
         android:id="@+id/imageView_strength_luck"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:layout_marginTop="25dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/imageView_strength_intelligence"
         app:layout_constraintTop_toBottomOf="@+id/imageView_strength_dexterity"
-        tools:srcCompat="@tools:sample/avatars" />
+        android:src="@drawable/greenclover" />
 
     <ImageView
         android:id="@+id/imageView_strength_intelligence"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:layout_marginTop="25dp"
         app:layout_constraintEnd_toStartOf="@+id/imageView_strength_luck"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView_strength_strength"
-        tools:srcCompat="@tools:sample/avatars" />
+        android:src="@drawable/yellowbook" />
 
     <ImageView
         android:id="@+id/imageView_strength_dexterity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:layout_marginTop="25dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/imageView_strength_strength"
         app:layout_constraintTop_toTopOf="@+id/guideline4"
-        tools:srcCompat="@tools:sample/avatars" />
+        android:src="@drawable/bluewings" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline4"
