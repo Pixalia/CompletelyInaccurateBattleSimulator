@@ -36,4 +36,5 @@
     <string name="foeStats">Foe Stats</string>
     <string name="name">Name:</string>
     <string name="toBattle">To Battle!</string>
+    <string name="retreat">The hour to retreat has passed. Victory belongs solely to those willing to take risks.</string>
 </resources>

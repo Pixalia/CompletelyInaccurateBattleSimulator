@@ -10,15 +10,10 @@ import android.view.View
 
 class HomePage : AppCompatActivity() {
 
-    var kyantaPlayer : MediaPlayer? = null
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        kyantaPlayer = MediaPlayer.create(this, R.raw.kyanta)
-        kyantaPlayer!!.isLooping = true
-        kyantaPlayer!!.start()
 
         testButton.setOnClickListener {
             val mainIntent = Intent(this@HomePage, StrengtheningActivity::class.java)
@@ -34,14 +29,6 @@ class HomePage : AppCompatActivity() {
         }
     }
 
-    override fun onPause(){
-        super.onPause()
-        kyantaPlayer!!.pause()
-    }
 
-    override fun onResume() {
-        super.onResume()
-        kyantaPlayer!!.start()
-    }
 
 }
