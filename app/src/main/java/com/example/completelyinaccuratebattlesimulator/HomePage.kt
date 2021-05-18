@@ -1,5 +1,6 @@
 package com.example.completelyinaccuratebattlesimulator
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
@@ -18,6 +19,19 @@ class HomePage : AppCompatActivity() {
         kyantaPlayer = MediaPlayer.create(this, R.raw.kyanta)
         kyantaPlayer!!.isLooping = true
         kyantaPlayer!!.start()
+
+        testButton.setOnClickListener {
+            val mainIntent = Intent(this@HomePage, StrengtheningActivity::class.java)
+            startActivity(mainIntent)
+            //to close the login screen so it's not there when user clicks bacc
+            finish()
+        }
+        testButton2.setOnClickListener {
+            val mainIntent = Intent(this@HomePage, BattlePrepActivity::class.java)
+            startActivity(mainIntent)
+            //to close the login screen so it's not there when user clicks bacc
+            finish()
+        }
     }
 
     override fun onPause(){

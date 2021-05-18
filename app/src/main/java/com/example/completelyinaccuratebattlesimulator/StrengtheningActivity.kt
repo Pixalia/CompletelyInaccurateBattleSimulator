@@ -1,5 +1,6 @@
 package com.example.completelyinaccuratebattlesimulator
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -46,6 +47,7 @@ class StrengtheningActivity : AppCompatActivity() {
         }
         button_strength_none.setOnClickListener {
             textView_strength_current.text = "Are you sure you don't want to strengthen yourself?"
+            current = "none"
         }
 
         button_strength_confirm.setOnClickListener{
@@ -85,6 +87,7 @@ class StrengtheningActivity : AppCompatActivity() {
 
                             override fun handleResponse(response: Character?) {
                                 Toast.makeText(this@StrengtheningActivity, "Strength increased!", Toast.LENGTH_SHORT).show()
+                                finishingUp()
                             }
 
                         })
@@ -104,6 +107,8 @@ class StrengtheningActivity : AppCompatActivity() {
 
                             override fun handleResponse(response: Character?) {
                                 Toast.makeText(this@StrengtheningActivity, "Dexterity increased!", Toast.LENGTH_SHORT).show()
+                                finishingUp()
+
                             }
 
                         })
@@ -123,6 +128,7 @@ class StrengtheningActivity : AppCompatActivity() {
 
                             override fun handleResponse(response: Character?) {
                                 Toast.makeText(this@StrengtheningActivity, "Intelligence increased!", Toast.LENGTH_SHORT).show()
+                                finishingUp()
                             }
 
                         })
@@ -142,15 +148,27 @@ class StrengtheningActivity : AppCompatActivity() {
 
                             override fun handleResponse(response: Character?) {
                                 Toast.makeText(this@StrengtheningActivity, "Luck increased!", Toast.LENGTH_SHORT).show()
+                                finishingUp()
                             }
 
                         })
                     }
                 }
+                else{
+                    Toast.makeText(this@StrengtheningActivity, "No stat has been increased.", Toast.LENGTH_SHORT).show()
+                    finishingUp()
+                }
 
             }
         })
 
+    }
+
+    fun finishingUp(){
+        val powerIntent = Intent(this@StrengtheningActivity, HomePage::class.java)
+        startActivity(powerIntent)
+        //to close the login screen so it's not there when user clicks bacc
+        finish()
     }
 
     fun generateQuote(){

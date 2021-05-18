@@ -39,7 +39,10 @@ class CreationActivity : AppCompatActivity() {
     }
 
     private fun safetyCheck(){
-        if (editText_creation_strength.text.isNullOrEmpty()){
+        if (editText_creation_name.text.isNullOrEmpty()){
+            Toast.makeText(this, "Who are you? Name yourself!", Toast.LENGTH_SHORT).show()
+        }
+        else if (editText_creation_strength.text.isNullOrEmpty()){
             Toast.makeText(this, "What a weakling! Give yourself some strength!", Toast.LENGTH_SHORT).show()
         }
         else if (editText_creation_dexterity.text.isNullOrEmpty()){
@@ -78,7 +81,8 @@ class CreationActivity : AppCompatActivity() {
         val character = Character(str = editText_creation_strength.text.toString().toInt(),
             dex = editText_creation_dexterity.text.toString().toInt(),
             int = editText_creation_intelligence.text.toString().toInt(),
-            luk = editText_creation_luck.text.toString().toInt()
+            luk = editText_creation_luck.text.toString().toInt(),
+            name = editText_creation_name.text.toString()
         )
         character.ownerId = user.userId
 

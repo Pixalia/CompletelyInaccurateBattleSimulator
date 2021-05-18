@@ -31,4 +31,9 @@
     <string name="current">Currently Selected: None</string>
     <string name="confirm">Confirm</string>
     <string name="relent">Relent</string>
+    <string name="prepTitle"><u>Prepare for battle!</u></string>
+    <string name="yourStats">Your Stats</string>
+    <string name="foeStats">Foe Stats</string>
+    <string name="name">Name:</string>
+    <string name="toBattle">To Battle!</string>
 </resources>

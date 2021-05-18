@@ -47,7 +47,7 @@ class LoginActivity : AppCompatActivity() {
 
                     if (response?.getProperty("createdCharacter") == true){
                         //val loginIntent = Intent(this@LoginActivity, HomePage::class.java)
-                        val loginIntent = Intent(this@LoginActivity, StrengtheningActivity::class.java)
+                        val loginIntent = Intent(this@LoginActivity, HomePage::class.java)
                         startActivity(loginIntent)
                         //to close the login screen so it's not there when user clicks bacc
                         finish()
