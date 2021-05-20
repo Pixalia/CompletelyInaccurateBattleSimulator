@@ -58,6 +58,7 @@
         android:id="@+id/imageView_battle_foeHealth"
         android:layout_width="205dp"
         android:layout_height="75dp"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline8"
         app:layout_constraintTop_toBottomOf="@+id/imageView_battle_foeAvatar"
@@ -67,11 +68,11 @@
         android:id="@+id/textView_battle_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="32dp"
         android:text="@string/battleLogTitle"
         android:textSize="25dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/imageView_battle_rightVine"
+        app:layout_constraintStart_toEndOf="@+id/imageView_battle_leftVine"
         app:layout_constraintTop_toTopOf="@+id/guideline7" />
 
     <androidx.constraintlayout.widget.Guideline
@@ -103,4 +104,22 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_battle_log1" />
+
+    <ImageView
+        android:id="@+id/imageView_battle_rightVine"
+        android:layout_width="133dp"
+        android:layout_height="83dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline7"
+        app:srcCompat="@drawable/vine" />
+
+    <ImageView
+        android:id="@+id/imageView_battle_leftVine"
+        android:layout_width="133dp"
+        android:layout_height="83dp"
+        android:scaleX="-1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline7"
+        app:srcCompat="@drawable/vine" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

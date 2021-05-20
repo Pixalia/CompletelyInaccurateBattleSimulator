@@ -1,5 +1,6 @@
 package com.example.completelyinaccuratebattlesimulator
 
+import android.graphics.Color
 import android.graphics.drawable.ClipDrawable
 import android.os.Bundle
 import android.os.Handler
@@ -13,6 +14,7 @@ import com.backendless.exceptions.BackendlessFault
 import com.backendless.persistence.DataQueryBuilder
 import kotlinx.android.synthetic.main.activity_battle.*
 import kotlinx.android.synthetic.main.activity_battle_prep.*
+import kotlinx.coroutines.delay
 
 class BattleActivity : AppCompatActivity() {
 
@@ -31,6 +33,7 @@ class BattleActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_battle)
+        textView_battle_header.setTextColor(Color.BLACK)
 
         foeId = intent.getStringExtra(BattlePrepActivity.ENEMY_ID)
 
@@ -45,7 +48,7 @@ class BattleActivity : AppCompatActivity() {
         // get foe's dex for later usage
         Backendless.Data.of(Character::class.java).find(queryBuilderFoe, object : AsyncCallback<List<Character?>?> {
             override fun handleFault(fault: BackendlessFault?) {
-                Log.d(BattlePrepActivity.TAG, "handleFault : ${fault?.detail}")
+                Log.d(BattleActivity.TAG, "handleFault : ${fault?.detail}")
             }
 
             override fun handleResponse(response: List<Character?>?) {
@@ -53,6 +56,22 @@ class BattleActivity : AppCompatActivity() {
                     val itemFoe = response.elementAt(0)
                     if (itemFoe != null){
                         foeDodge = itemFoe.dex
+
+                        if (itemFoe.str > itemFoe.dex && itemFoe.str > itemFoe.int && itemFoe.str > itemFoe.luk){
+                            imageView_battle_foeAvatar.setImageResource(R.drawable.bluheavy)
+                        }
+                        else if (itemFoe.dex > itemFoe.str && itemFoe.dex > itemFoe.int && itemFoe.dex > itemFoe.luk){
+                            imageView_battle_foeAvatar.setImageResource(R.drawable.bluscout)
+                        }
+                        else if (itemFoe.int > itemFoe.dex && itemFoe.int > itemFoe.str && itemFoe.int > itemFoe.luk){
+                            imageView_battle_foeAvatar.setImageResource(R.drawable.blueengi)
+                        }
+                        else if (itemFoe.luk > itemFoe.dex && itemFoe.luk > itemFoe.str && itemFoe.luk > itemFoe.int){
+                            imageView_battle_foeAvatar.setImageResource(R.drawable.bluspy)
+                        }
+                        else {
+                            imageView_battle_foeAvatar.setImageResource(R.drawable.blupyro)
+                        }
                     }
                 }
             }
@@ -66,7 +85,7 @@ class BattleActivity : AppCompatActivity() {
 
         Backendless.Data.of(Character::class.java).find(queryBuilderUser, object : AsyncCallback<List<Character?>?> {
             override fun handleFault(fault: BackendlessFault?) {
-                Log.d(BattlePrepActivity.TAG, "handleFault : ${fault?.detail}")
+                Log.d(BattleActivity.TAG, "handleFault : ${fault?.detail}")
             }
 
             override fun handleResponse(response: List<Character?>?) {
@@ -75,31 +94,55 @@ class BattleActivity : AppCompatActivity() {
 
                     if (itemUser != null){
                         userDodge = itemUser.dex
+
+                        if (itemUser.str > itemUser.dex && itemUser.str > itemUser.int && itemUser.str > itemUser.luk){
+                            imageView_battle_avatar.setImageResource(R.drawable.redheavy)
+                        }
+                        else if (itemUser.dex > itemUser.str && itemUser.dex > itemUser.int && itemUser.dex > itemUser.luk){
+                            imageView_battle_avatar.setImageResource(R.drawable.redscout)
+                        }
+                        else if (itemUser.int > itemUser.dex && itemUser.int > itemUser.str && itemUser.int > itemUser.luk){
+                            imageView_battle_avatar.setImageResource(R.drawable.redengi)
+                        }
+                        else if (itemUser.luk > itemUser.dex && itemUser.luk > itemUser.str && itemUser.luk > itemUser.int){
+                            imageView_battle_avatar.setImageResource(R.drawable.redspy)
+                        }
+                        else {
+                            imageView_battle_avatar.setImageResource(R.drawable.redpyro)
+                        }
                     }
                 }
             }
         })
 
         foeId = intent.getStringExtra(BattlePrepActivity.ENEMY_ID)
+
         calculateFirstTurn()
 
         //this code here is to make the health bar go down
 
-        /*var healthBar = imageView_battle_userHealth.drawable
-        healthBar.level = 5000*/
     }
 
     fun calculateFirstTurn(){
         val turn = (0..1).random()
         if (turn == 0){
             textView_battle_log1.text = "You go first!"
-            //Thread.sleep(1500)
-            playerPhase()
+            Thread.sleep(1500)
+            Handler().postDelayed(
+                {
+                    playerPhase()
+                },
+                1000
+            )
         }
         else if (turn == 1){
             textView_battle_log1.text = "The enemy goes first!"
-            //Thread.sleep(1500)
-            enemyPhase()
+            Handler().postDelayed(
+                {
+                    enemyPhase()
+                },
+                1000
+            )
         }
     }
 
@@ -112,7 +155,7 @@ class BattleActivity : AppCompatActivity() {
 
         Backendless.Data.of(Character::class.java).find(queryBuilder, object : AsyncCallback<List<Character?>?> {
             override fun handleFault(fault: BackendlessFault?) {
-                Log.d(BattlePrepActivity.TAG, "handleFault : ${fault?.detail}")
+                Log.d(BattleActivity.TAG, "handleFault : ${fault?.detail}")
             }
 
             override fun handleResponse(response: List<Character?>?) {
@@ -138,37 +181,50 @@ class BattleActivity : AppCompatActivity() {
                                 textView_battle_log3.text = textView_battle_log2.text
                                 textView_battle_log2.text = textView_battle_log1.text
                                 textView_battle_log1.text = "Turn ${currentTurn}: Critical! '${item.name}' dealt '$damage' damage!"
-                                //Thread.sleep(1500)
-                                currentTurn++
-                                if (foeHealth <= 0){
-                                    userVictory()
-                                }
-                                else{
-                                    enemyPhase()
-                                }
+                                Handler().postDelayed(
+                                    {
+                                        currentTurn++
+                                        if (foeHealth <= 0){
+                                            userVictory()
+                                        }
+                                        else{
+                                            enemyPhase()
+                                        }
+                                    },
+                                    500
+                                )
+
                             }
                             else{
                                 foeHealth -= damage
                                 textView_battle_log3.text = textView_battle_log2.text
                                 textView_battle_log2.text = textView_battle_log1.text
                                 textView_battle_log1.text = "Turn ${currentTurn}: '${item.name}' dealt '$damage' damage."
-                                //Thread.sleep(1500)
-                                currentTurn++
-                                if (foeHealth <= 0){
-                                    userVictory()
-                                }
-                                else{
-                                    enemyPhase()
-                                }
+                                Handler().postDelayed(
+                                    {
+                                        currentTurn++
+                                        if (foeHealth <= 0){
+                                            userVictory()
+                                        }
+                                        else{
+                                            enemyPhase()
+                                        }
+                                    },
+                                    500
+                                )
                             }
                         }
                         else {
                             textView_battle_log3.text = textView_battle_log2.text
                             textView_battle_log2.text = textView_battle_log1.text
                             textView_battle_log1.text = "Turn ${currentTurn}: You missed!"
-                            //Thread.sleep(1500)
-                            currentTurn++
-                            enemyPhase()
+                            Handler().postDelayed(
+                                {
+                                    currentTurn++
+                                    enemyPhase()
+                                },
+                                500
+                            )
                         }
                     }
 
@@ -187,7 +243,7 @@ class BattleActivity : AppCompatActivity() {
 
         Backendless.Data.of(Character::class.java).find(queryBuilder, object : AsyncCallback<List<Character?>?> {
             override fun handleFault(fault: BackendlessFault?) {
-                Log.d(BattlePrepActivity.TAG, "handleFault : ${fault?.detail}")
+                Log.d(BattleActivity.TAG, "handleFault : ${fault?.detail}")
             }
 
             override fun handleResponse(response: List<Character?>?) {
@@ -213,42 +269,49 @@ class BattleActivity : AppCompatActivity() {
                                 textView_battle_log3.text = textView_battle_log2.text
                                 textView_battle_log2.text = textView_battle_log1.text
                                 textView_battle_log1.text = "Turn ${currentTurn}: Critical! '${item.name}' dealt '$damage' damage!"
-                                //Thread.sleep(1500)
-                                currentTurn++
-                                if (foeHealth <= 0){
-                                    foeVictory()
-                                }
-                                else{
-                                    playerPhase()
-                                }
+                                Handler().postDelayed(
+                                    {
+                                        currentTurn++
+                                        if (userHealth <= 0){
+                                            foeVictory()
+                                        }
+                                        else{
+                                            playerPhase()
+                                        }
+                                    },
+                                    500
+                                )
                             }
                             else{
                                 userHealth -= damage
                                 textView_battle_log3.text = textView_battle_log2.text
                                 textView_battle_log2.text = textView_battle_log1.text
                                 textView_battle_log1.text = "Turn ${currentTurn}: '${item.name}' dealt '$damage' damage."
-                                //Thread.sleep(1500)
-                                currentTurn++
-                                if (foeHealth <= 0){
-                                    foeVictory()
-                                }
-                                else{
-                                    playerPhase()
-                                }
+                                Handler().postDelayed(
+                                    {
+                                        currentTurn++
+                                        if (userHealth <= 0){
+                                            foeVictory()
+                                        }
+                                        else{
+                                            playerPhase()
+                                        }
+                                    },
+                                    500
+                                )
                             }
                         }
                         else {
                             textView_battle_log3.text = textView_battle_log2.text
                             textView_battle_log2.text = textView_battle_log1.text
                             textView_battle_log1.text = "Turn ${currentTurn}: The enemy missed!"
-                            //Thread.sleep(1500)
-                            currentTurn++
-                            if (foeHealth <= 0){
-                                foeVictory()
-                            }
-                            else{
-                                playerPhase()
-                            }
+                            Handler().postDelayed(
+                                {
+                                    currentTurn++
+                                    playerPhase()
+                                },
+                                500
+                            )
                         }
                     }
                 }
@@ -258,10 +321,14 @@ class BattleActivity : AppCompatActivity() {
     }
 
     fun userVictory(){
+        textView_battle_log3.text = textView_battle_log2.text
+        textView_battle_log2.text = textView_battle_log1.text
         textView_battle_log1.text = "Player wins!"
     }
 
     fun foeVictory(){
+        textView_battle_log3.text = textView_battle_log2.text
+        textView_battle_log2.text = textView_battle_log1.text
         textView_battle_log1.text = "Foe wins!"
     }
 

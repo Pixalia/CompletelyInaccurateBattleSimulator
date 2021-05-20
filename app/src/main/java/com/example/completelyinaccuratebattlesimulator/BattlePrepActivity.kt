@@ -72,16 +72,16 @@ class BattlePrepActivity : AppCompatActivity() {
                     textView_prep_luk.text = "Luk: " + item!!.luk.toString()
                     textView_prep_luk.setTextColor(Color.GREEN)
 
-                    if (item!!.str > item!!.dex && item!!.str > item!!.int && item!!.str > item.luk){
+                    if (item.str > item.dex && item.str > item.int && item.str > item.luk){
                         imageView_prep_player.setImageResource(R.drawable.redheavy)
                     }
-                    else if (item!!.dex > item!!.str && item!!.dex > item!!.int && item!!.dex > item.luk){
+                    else if (item.dex > item.str && item.dex > item.int && item.dex > item.luk){
                         imageView_prep_player.setImageResource(R.drawable.redscout)
                     }
-                    else if (item!!.int > item!!.dex && item!!.int > item!!.str && item!!.int > item.luk){
+                    else if (item.int > item.dex && item.int > item.str && item.int > item.luk){
                         imageView_prep_player.setImageResource(R.drawable.redengi)
                     }
-                    else if (item!!.luk > item!!.dex && item!!.luk > item!!.str && item!!.luk > item.int){
+                    else if (item.luk > item.dex && item.luk > item.str && item.luk > item.int){
                         imageView_prep_player.setImageResource(R.drawable.redspy)
                     }
                     else {
