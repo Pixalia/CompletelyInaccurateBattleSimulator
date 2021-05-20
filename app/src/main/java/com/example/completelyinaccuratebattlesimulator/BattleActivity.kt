@@ -22,6 +22,7 @@ class BattleActivity : AppCompatActivity() {
     private var foeHealth = 50
     private var foeDodge = 0
     private var userDodge = 0
+    private var currentTurn = 1
 
     companion object{
         val TAG = "BattleActivity"
@@ -31,9 +32,15 @@ class BattleActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_battle)
 
+        foeId = intent.getStringExtra(BattlePrepActivity.ENEMY_ID)
+
         val whereClauseFoe = "ownerId = '$foeId'"
         val queryBuilderFoe = DataQueryBuilder.create()
         queryBuilderFoe.whereClause = whereClauseFoe
+
+        textView_battle_log1.text = ""
+        textView_battle_log2.text = ""
+        textView_battle_log3.text = ""
 
         // get foe's dex for later usage
         Backendless.Data.of(Character::class.java).find(queryBuilderFoe, object : AsyncCallback<List<Character?>?> {
@@ -78,16 +85,20 @@ class BattleActivity : AppCompatActivity() {
 
         //this code here is to make the health bar go down
 
-        var healthBar = imageView_battle_userHealth.drawable
-        healthBar.level = 5000
+        /*var healthBar = imageView_battle_userHealth.drawable
+        healthBar.level = 5000*/
     }
 
     fun calculateFirstTurn(){
         val turn = (0..1).random()
         if (turn == 0){
+            textView_battle_log1.text = "You go first!"
+            //Thread.sleep(1500)
             playerPhase()
         }
         else if (turn == 1){
+            textView_battle_log1.text = "The enemy goes first!"
+            //Thread.sleep(1500)
             enemyPhase()
         }
     }
@@ -107,6 +118,7 @@ class BattleActivity : AppCompatActivity() {
             override fun handleResponse(response: List<Character?>?) {
                 if (response != null){
                     val item = response.elementAt(0)
+                    var critTrue = false
 
                     if (item != null){
 
@@ -116,17 +128,47 @@ class BattleActivity : AppCompatActivity() {
                         val critChance = (0..100).random()
 
                         if (critChance < (5 + item.luk)){
-                            damage *= 2
+                            critTrue = true
                         }
 
                         if (hitChance >= foeDodgeChance){
-                            foeHealth -= damage
-                            // edit health bar
-                            //Thread.delay(1500)
+                            if (critTrue){
+                                damage *= 2
+                                foeHealth -= damage
+                                textView_battle_log3.text = textView_battle_log2.text
+                                textView_battle_log2.text = textView_battle_log1.text
+                                textView_battle_log1.text = "Turn ${currentTurn}: Critical! '${item.name}' dealt '$damage' damage!"
+                                //Thread.sleep(1500)
+                                currentTurn++
+                                if (foeHealth <= 0){
+                                    userVictory()
+                                }
+                                else{
+                                    enemyPhase()
+                                }
+                            }
+                            else{
+                                foeHealth -= damage
+                                textView_battle_log3.text = textView_battle_log2.text
+                                textView_battle_log2.text = textView_battle_log1.text
+                                textView_battle_log1.text = "Turn ${currentTurn}: '${item.name}' dealt '$damage' damage."
+                                //Thread.sleep(1500)
+                                currentTurn++
+                                if (foeHealth <= 0){
+                                    userVictory()
+                                }
+                                else{
+                                    enemyPhase()
+                                }
+                            }
                         }
                         else {
-                            Toast.makeText(this@BattleActivity, "You missed!", Toast.LENGTH_SHORT).show()
-                            turnDelay()
+                            textView_battle_log3.text = textView_battle_log2.text
+                            textView_battle_log2.text = textView_battle_log1.text
+                            textView_battle_log1.text = "Turn ${currentTurn}: You missed!"
+                            //Thread.sleep(1500)
+                            currentTurn++
+                            enemyPhase()
                         }
                     }
 
@@ -151,26 +193,62 @@ class BattleActivity : AppCompatActivity() {
             override fun handleResponse(response: List<Character?>?) {
                 if (response != null){
                     val item = response.elementAt(0)
+                    var critTrue = false
 
                     if (item != null){
 
                         val hitChance = (item.int + (0..20).random())
-                        val foeDodgeChance = (userDodge + (0..20).random())
+                        val userDodgeChance = (userDodge + (0..20).random())
                         var damage = (item.str + (0..(item.str/2)).random()) + 1
                         val critChance = (0..100).random()
 
                         if (critChance < (5 + item.luk)){
-                            damage *= 2
+                            critTrue = true
                         }
 
-                        if (hitChance >= foeDodgeChance){
-                            userHealth -= damage
-                            // edit health bar
-                            turnDelay()
+                        if (hitChance >= userDodgeChance){
+                            if (critTrue){
+                                damage *= 2
+                                userHealth -= damage
+                                textView_battle_log3.text = textView_battle_log2.text
+                                textView_battle_log2.text = textView_battle_log1.text
+                                textView_battle_log1.text = "Turn ${currentTurn}: Critical! '${item.name}' dealt '$damage' damage!"
+                                //Thread.sleep(1500)
+                                currentTurn++
+                                if (foeHealth <= 0){
+                                    foeVictory()
+                                }
+                                else{
+                                    playerPhase()
+                                }
+                            }
+                            else{
+                                userHealth -= damage
+                                textView_battle_log3.text = textView_battle_log2.text
+                                textView_battle_log2.text = textView_battle_log1.text
+                                textView_battle_log1.text = "Turn ${currentTurn}: '${item.name}' dealt '$damage' damage."
+                                //Thread.sleep(1500)
+                                currentTurn++
+                                if (foeHealth <= 0){
+                                    foeVictory()
+                                }
+                                else{
+                                    playerPhase()
+                                }
+                            }
                         }
                         else {
-                            Toast.makeText(this@BattleActivity, "You missed!", Toast.LENGTH_SHORT).show()
-                            turnDelay()
+                            textView_battle_log3.text = textView_battle_log2.text
+                            textView_battle_log2.text = textView_battle_log1.text
+                            textView_battle_log1.text = "Turn ${currentTurn}: The enemy missed!"
+                            //Thread.sleep(1500)
+                            currentTurn++
+                            if (foeHealth <= 0){
+                                foeVictory()
+                            }
+                            else{
+                                playerPhase()
+                            }
                         }
                     }
                 }
@@ -179,7 +257,13 @@ class BattleActivity : AppCompatActivity() {
         })
     }
 
-    fun turnDelay(){
-        // Implement turn delay here
+    fun userVictory(){
+        textView_battle_log1.text = "Player wins!"
     }
+
+    fun foeVictory(){
+        textView_battle_log1.text = "Foe wins!"
+    }
+
+
 }
