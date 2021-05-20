@@ -122,7 +122,7 @@ class BattleActivity : AppCompatActivity() {
                         if (hitChance >= foeDodgeChance){
                             foeHealth -= damage
                             // edit health bar
-                            turnDelay()
+                            //Thread.delay(1500)
                         }
                         else {
                             Toast.makeText(this@BattleActivity, "You missed!", Toast.LENGTH_SHORT).show()
