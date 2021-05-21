@@ -5,6 +5,7 @@ import android.graphics.drawable.ClipDrawable
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
+import android.view.Gravity
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -181,6 +182,36 @@ class BattleActivity : AppCompatActivity() {
                                 textView_battle_log3.text = textView_battle_log2.text
                                 textView_battle_log2.text = textView_battle_log1.text
                                 textView_battle_log1.text = "Turn ${currentTurn}: Critical! '${item.name}' dealt '$damage' damage!"
+                                if (foeHealth <= 45){
+                                    imageView_battle_foeHeart5.setImageResource(R.drawable.hearthalfmirror)
+                                }
+                                if (foeHealth <= 40){
+                                    imageView_battle_foeHeart5.setImageResource(R.drawable.heartempty)
+                                }
+                                if (foeHealth <= 35){
+                                    imageView_battle_foeHeart4.setImageResource(R.drawable.hearthalfmirror)
+                                }
+                                if (foeHealth <= 30){
+                                    imageView_battle_foeHeart4.setImageResource(R.drawable.heartempty)
+                                }
+                                if (foeHealth <= 25){
+                                    imageView_battle_foeHeart3.setImageResource(R.drawable.hearthalfmirror)
+                                }
+                                if (foeHealth <= 20){
+                                    imageView_battle_foeHeart3.setImageResource(R.drawable.heartempty)
+                                }
+                                if (foeHealth <= 15){
+                                    imageView_battle_foeHeart2.setImageResource(R.drawable.hearthalfmirror)
+                                }
+                                if (foeHealth <= 10){
+                                    imageView_battle_foeHeart2.setImageResource(R.drawable.heartempty)
+                                }
+                                if (foeHealth <= 5){
+                                    imageView_battle_foeHeart1.setImageResource(R.drawable.hearthalfmirror)
+                                }
+                                if (foeHealth <= 0){
+                                    imageView_battle_foeHeart1.setImageResource(R.drawable.heartempty)
+                                }
                                 Handler().postDelayed(
                                     {
                                         currentTurn++
@@ -200,6 +231,36 @@ class BattleActivity : AppCompatActivity() {
                                 textView_battle_log3.text = textView_battle_log2.text
                                 textView_battle_log2.text = textView_battle_log1.text
                                 textView_battle_log1.text = "Turn ${currentTurn}: '${item.name}' dealt '$damage' damage."
+                                if (foeHealth <= 45){
+                                    imageView_battle_foeHeart5.setImageResource(R.drawable.hearthalfmirror)
+                                }
+                                if (foeHealth <= 40){
+                                    imageView_battle_foeHeart5.setImageResource(R.drawable.heartempty)
+                                }
+                                if (foeHealth <= 35){
+                                    imageView_battle_foeHeart4.setImageResource(R.drawable.hearthalfmirror)
+                                }
+                                if (foeHealth <= 30){
+                                    imageView_battle_foeHeart4.setImageResource(R.drawable.heartempty)
+                                }
+                                if (foeHealth <= 25){
+                                    imageView_battle_foeHeart3.setImageResource(R.drawable.hearthalfmirror)
+                                }
+                                if (foeHealth <= 20){
+                                    imageView_battle_foeHeart3.setImageResource(R.drawable.heartempty)
+                                }
+                                if (foeHealth <= 15){
+                                    imageView_battle_foeHeart2.setImageResource(R.drawable.hearthalfmirror)
+                                }
+                                if (foeHealth <= 10){
+                                    imageView_battle_foeHeart2.setImageResource(R.drawable.heartempty)
+                                }
+                                if (foeHealth <= 5){
+                                    imageView_battle_foeHeart1.setImageResource(R.drawable.hearthalfmirror)
+                                }
+                                if (foeHealth <= 0){
+                                    imageView_battle_foeHeart1.setImageResource(R.drawable.heartempty)
+                                }
                                 Handler().postDelayed(
                                     {
                                         currentTurn++
@@ -269,6 +330,36 @@ class BattleActivity : AppCompatActivity() {
                                 textView_battle_log3.text = textView_battle_log2.text
                                 textView_battle_log2.text = textView_battle_log1.text
                                 textView_battle_log1.text = "Turn ${currentTurn}: Critical! '${item.name}' dealt '$damage' damage!"
+                                if (userHealth <= 45){
+                                    imageView_battle_userHeart5.setImageResource(R.drawable.hearthalf)
+                                }
+                                if (userHealth <= 40){
+                                    imageView_battle_userHeart5.setImageResource(R.drawable.heartempty)
+                                }
+                                if (userHealth <= 35){
+                                    imageView_battle_userHeart4.setImageResource(R.drawable.hearthalf)
+                                }
+                                if (userHealth <= 30){
+                                    imageView_battle_userHeart4.setImageResource(R.drawable.heartempty)
+                                }
+                                if (userHealth <= 25){
+                                    imageView_battle_userHeart3.setImageResource(R.drawable.hearthalf)
+                                }
+                                if (userHealth <= 20){
+                                    imageView_battle_userHeart3.setImageResource(R.drawable.heartempty)
+                                }
+                                if (userHealth <= 15){
+                                    imageView_battle_userHeart2.setImageResource(R.drawable.hearthalf)
+                                }
+                                if (userHealth <= 10){
+                                    imageView_battle_userHeart2.setImageResource(R.drawable.heartempty)
+                                }
+                                if (userHealth <= 5){
+                                    imageView_battle_userHeart1.setImageResource(R.drawable.hearthalf)
+                                }
+                                if (userHealth <= 0){
+                                    imageView_battle_userHeart1.setImageResource(R.drawable.heartempty)
+                                }
                                 Handler().postDelayed(
                                     {
                                         currentTurn++
@@ -287,6 +378,36 @@ class BattleActivity : AppCompatActivity() {
                                 textView_battle_log3.text = textView_battle_log2.text
                                 textView_battle_log2.text = textView_battle_log1.text
                                 textView_battle_log1.text = "Turn ${currentTurn}: '${item.name}' dealt '$damage' damage."
+                                if (userHealth <= 45){
+                                    imageView_battle_userHeart5.setImageResource(R.drawable.hearthalf)
+                                }
+                                if (userHealth <= 40){
+                                    imageView_battle_userHeart5.setImageResource(R.drawable.heartempty)
+                                }
+                                if (userHealth <= 35){
+                                    imageView_battle_userHeart4.setImageResource(R.drawable.hearthalf)
+                                }
+                                if (userHealth <= 30){
+                                    imageView_battle_userHeart4.setImageResource(R.drawable.heartempty)
+                                }
+                                if (userHealth <= 25){
+                                    imageView_battle_userHeart3.setImageResource(R.drawable.hearthalf)
+                                }
+                                if (userHealth <= 20){
+                                    imageView_battle_userHeart3.setImageResource(R.drawable.heartempty)
+                                }
+                                if (userHealth <= 15){
+                                    imageView_battle_userHeart2.setImageResource(R.drawable.hearthalf)
+                                }
+                                if (userHealth <= 10){
+                                    imageView_battle_userHeart2.setImageResource(R.drawable.heartempty)
+                                }
+                                if (userHealth <= 5){
+                                    imageView_battle_userHeart1.setImageResource(R.drawable.hearthalf)
+                                }
+                                if (userHealth <= 0){
+                                    imageView_battle_userHeart1.setImageResource(R.drawable.heartempty)
+                                }
                                 Handler().postDelayed(
                                     {
                                         currentTurn++
