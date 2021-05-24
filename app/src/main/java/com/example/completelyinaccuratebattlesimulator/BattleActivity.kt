@@ -1,5 +1,6 @@
 package com.example.completelyinaccuratebattlesimulator
 
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ClipDrawable
 import android.os.Bundle
@@ -445,12 +446,94 @@ class BattleActivity : AppCompatActivity() {
         textView_battle_log3.text = textView_battle_log2.text
         textView_battle_log2.text = textView_battle_log1.text
         textView_battle_log1.text = "Player wins!"
+        Handler().postDelayed(
+            {
+                val whereClauseUser = "ownerId = '$userId'"
+                val queryBuilderUser = DataQueryBuilder.create()
+                queryBuilderUser.whereClause = whereClauseUser
+
+                Backendless.Data.of(Character::class.java).find(queryBuilderUser, object : AsyncCallback<List<Character?>?> {
+                    override fun handleFault(fault: BackendlessFault?) {
+                        Log.d(BattleActivity.TAG, "handleFault : ${fault?.detail}")
+                    }
+
+                    override fun handleResponse(response: List<Character?>?) {
+                        if (response != null){
+                            val itemUser = response.elementAt(0)
+
+                            if (itemUser != null){
+                               if (itemUser.winStreak == 3){
+                                   val battleIntent = Intent(this@BattleActivity, StrengtheningActivity::class.java)
+                                   startActivity(battleIntent)
+                                   //to close the login screen so it's not there when user clicks bacc
+                                   finish()
+                               }
+                               else{
+                                   itemUser.winStreak++
+                                   Backendless.Data.of(Character::class.java).save(itemUser, object: AsyncCallback<Character>{
+                                       override fun handleFault(fault: BackendlessFault?) {
+                                           Log.d(BattleActivity.TAG, "handleFault : ${fault?.detail}")
+                                       }
+
+                                       override fun handleResponse(response: Character?) {
+                                           val battleIntent = Intent(this@BattleActivity, HomePage::class.java)
+                                           startActivity(battleIntent)
+                                           //to close the login screen so it's not there when user clicks bacc
+                                           finish()
+                                       }
+
+                                   })
+                               }
+                            }
+                        }
+                    }
+                })
+            },
+            1500
+        )
     }
 
     fun foeVictory(){
         textView_battle_log3.text = textView_battle_log2.text
         textView_battle_log2.text = textView_battle_log1.text
         textView_battle_log1.text = "Foe wins!"
+        Handler().postDelayed({
+            val whereClauseUser = "ownerId = '$userId'"
+            val queryBuilderUser = DataQueryBuilder.create()
+            queryBuilderUser.whereClause = whereClauseUser
+
+            Backendless.Data.of(Character::class.java).find(queryBuilderUser, object : AsyncCallback<List<Character?>?> {
+                override fun handleFault(fault: BackendlessFault?) {
+                    Log.d(BattleActivity.TAG, "handleFault : ${fault?.detail}")
+                }
+
+                override fun handleResponse(response: List<Character?>?) {
+                    if (response != null){
+                        val itemUser = response.elementAt(0)
+
+                        if (itemUser != null){
+                                itemUser.winStreak = 0
+                                Backendless.Data.of(Character::class.java).save(itemUser, object: AsyncCallback<Character>{
+                                    override fun handleFault(fault: BackendlessFault?) {
+                                        Log.d(BattleActivity.TAG, "handleFault : ${fault?.detail}")
+                                    }
+
+                                    override fun handleResponse(response: Character?) {
+                                        val battleIntent = Intent(this@BattleActivity, HomePage::class.java)
+                                        startActivity(battleIntent)
+                                        //to close the login screen so it's not there when user clicks bacc
+                                        finish()
+                                    }
+
+                                })
+                            }
+                        }
+                    }
+
+            })
+        },
+            1500
+        )
     }
 
 
