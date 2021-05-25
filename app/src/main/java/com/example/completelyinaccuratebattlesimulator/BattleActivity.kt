@@ -3,13 +3,16 @@ package com.example.completelyinaccuratebattlesimulator
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ClipDrawable
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
 import android.view.Gravity
 import android.widget.ImageView
+import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.backendless.Backendless
 import com.backendless.async.callback.AsyncCallback
 import com.backendless.exceptions.BackendlessFault
@@ -27,6 +30,12 @@ class BattleActivity : AppCompatActivity() {
     private var foeDodge = 0
     private var userDodge = 0
     private var currentTurn = 1
+    var enemyStatTotal : Int = 0
+    var userStatTotal : Int = 0
+    var upHillBattle : Boolean = false
+    var equalBattle : Boolean = false
+    var advantageBattle : Boolean = false
+    var musicPlayer : MediaPlayer? = null
 
     companion object{
         val TAG = "BattleActivity"
@@ -57,7 +66,9 @@ class BattleActivity : AppCompatActivity() {
                 if (response != null){
                     val itemFoe = response.elementAt(0)
                     if (itemFoe != null){
-                        foeDodge = itemFoe.dex
+                        //foeDodge = itemFoe.dex
+
+                        val enemyStatTotal = itemFoe.str + itemFoe.dex + itemFoe.int + itemFoe.luk
 
                         if (itemFoe.str > itemFoe.dex && itemFoe.str > itemFoe.int && itemFoe.str > itemFoe.luk){
                             imageView_battle_foeAvatar.setImageResource(R.drawable.bluheavy)
@@ -74,11 +85,13 @@ class BattleActivity : AppCompatActivity() {
                         else {
                             imageView_battle_foeAvatar.setImageResource(R.drawable.blupyro)
                         }
+
                     }
                 }
             }
 
         })
+
 
         // gets user's dex for later usage
         val whereClauseUser = "ownerId = '$userId'"
@@ -96,6 +109,8 @@ class BattleActivity : AppCompatActivity() {
 
                     if (itemUser != null){
                         userDodge = itemUser.dex
+
+                        userStatTotal = itemUser.str + itemUser.dex + itemUser.int + itemUser.luk
 
                         if (itemUser.str > itemUser.dex && itemUser.str > itemUser.int && itemUser.str > itemUser.luk){
                             imageView_battle_avatar.setImageResource(R.drawable.redheavy)
@@ -119,9 +134,38 @@ class BattleActivity : AppCompatActivity() {
 
         foeId = intent.getStringExtra(BattlePrepActivity.ENEMY_ID)
 
-        calculateFirstTurn()
 
-        //this code here is to make the health bar go down
+        var layout = RelativeLayout(this@BattleActivity)
+
+        if (userStatTotal > (enemyStatTotal + 5)){
+            advantageBattle = true
+            layout.background = ContextCompat.getDrawable(this, R.drawable.backgroundc)
+            musicPlayer = MediaPlayer.create(this, R.raw.easybattle)
+            musicPlayer!!.isLooping = true
+            musicPlayer!!.start()
+
+            calculateFirstTurn()
+        }
+        else if ((userStatTotal) + 5 < enemyStatTotal){
+            upHillBattle = true
+            layout.background = ContextCompat.getDrawable(this, R.drawable.backgroundb)
+            musicPlayer = MediaPlayer.create(this, R.raw.uphillbattle)
+            musicPlayer!!.isLooping = true
+            musicPlayer!!.start()
+
+            calculateFirstTurn()
+        }
+        else {
+            equalBattle = true
+            layout.background = ContextCompat.getDrawable(this, R.drawable.backgrounda)
+            musicPlayer = MediaPlayer.create(this, R.raw.regularbattle)
+            musicPlayer!!.isLooping = true
+            musicPlayer!!.start()
+
+            calculateFirstTurn()
+        }
+
+
 
     }
 
@@ -534,6 +578,16 @@ class BattleActivity : AppCompatActivity() {
         },
             1500
         )
+    }
+
+    override fun onPause(){
+        super.onPause()
+        musicPlayer!!.pause()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        musicPlayer!!.start()
     }
 
 

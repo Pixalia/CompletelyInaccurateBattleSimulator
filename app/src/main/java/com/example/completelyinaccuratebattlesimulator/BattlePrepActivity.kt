@@ -17,12 +17,14 @@ class BattlePrepActivity : AppCompatActivity() {
     companion object{
         val TAG = "BattlePrepActivity"
         val ENEMY_ID = "number"
+        val BATTLE_TYPE = "battleType"
     }
 
     val userId = Backendless.UserService.CurrentUser().userId
     var kyantaPlayer : MediaPlayer? = null
     var enemyNumber : Int = 0
     var enemyID : String = ""
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,6 +73,8 @@ class BattlePrepActivity : AppCompatActivity() {
                     textView_prep_int.setTextColor(Color.YELLOW)
                     textView_prep_luk.text = "Luk: " + item!!.luk.toString()
                     textView_prep_luk.setTextColor(Color.GREEN)
+
+
 
                     if (item.str > item.dex && item.str > item.int && item.str > item.luk){
                         imageView_prep_player.setImageResource(R.drawable.redheavy)
