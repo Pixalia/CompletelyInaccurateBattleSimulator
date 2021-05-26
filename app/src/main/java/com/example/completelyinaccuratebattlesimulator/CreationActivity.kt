@@ -24,14 +24,19 @@ class CreationActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_creation)
 
-        button_creation_backToMain.setOnClickListener {
-            if (user.getProperty("createdCharacter") == false){
-                Toast.makeText(this, "Error: No character data found!", Toast.LENGTH_SHORT).show()
+        user.setProperty("createdCharacter", false)
+        Backendless.UserService.update(user, object: AsyncCallback<BackendlessUser>{
+            override fun handleFault(fault: BackendlessFault?) {
+
+                Log.d(TAG, "handleFault : ${fault?.detail}")
+
             }
-            else{
-                creationFinished()
+
+            override fun handleResponse(response: BackendlessUser?) {
+                //yes
             }
-        }
+
+        })
 
         button_creation_finish.setOnClickListener {
             safetyCheck()

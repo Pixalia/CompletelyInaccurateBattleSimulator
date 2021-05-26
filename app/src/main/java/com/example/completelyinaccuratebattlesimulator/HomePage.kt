@@ -39,6 +39,7 @@ class HomePage : AppCompatActivity() {
         button.setOnClickListener {
             val mainIntent = Intent(this@HomePage, LeaderboardActivity::class.java)
             startActivity(mainIntent)
+            finish()
         }
         button2.setOnClickListener {
             Backendless.UserService.logout(object : AsyncCallback<Void?> {
@@ -46,12 +47,18 @@ class HomePage : AppCompatActivity() {
                     Toast.makeText(this@HomePage, "User has logged out,", Toast.LENGTH_SHORT).show()
                     val mainIntent = Intent(this@HomePage, LoginActivity::class.java)
                     startActivity(mainIntent)
+                    finish()
                 }
 
                 override fun handleFault(fault: BackendlessFault) {
                     Log.d(HomePage.TAG, "handleFault: " + fault?.message)
                 }
             })
+        }
+        button3.setOnClickListener {
+            val mainIntent = Intent(this@HomePage, CharacterActivity::class.java)
+            startActivity(mainIntent)
+            finish()
         }
     }
 

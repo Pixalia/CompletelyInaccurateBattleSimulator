@@ -42,4 +42,10 @@
     <string name="footer"><i>May the valor of the strong be recorded for time eternal</i></string>
     <string name="ranking">Ranking item</string>
     <string name="initalRanking">-1</string>
+    <string name="delete">Delete Character</string>
+    <string name="namer">Name</string>
+    <string name="str">Strength</string>
+    <string name="dex">Dexterity</string>
+    <string name="inte">Intelligence</string>
+    <string name="luk">Luck</string>
 </resources>

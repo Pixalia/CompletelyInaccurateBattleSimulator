@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@drawable/creationbg"
     android:layout_height="match_parent"
     tools:context=".CreationActivity">
 
@@ -11,6 +12,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
+        android:background="@drawable/button_curve"
+        android:textColor="@android:color/white"
+        android:padding="10dp"
         android:text="@string/creationTitle"
         android:textSize="32sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -23,6 +27,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:text="@string/strength"
+        android:background="@drawable/wins_curve"
+        android:textColor="@android:color/white"
+        android:padding="5dp"
         app:layout_constraintBottom_toTopOf="@+id/textView_creation_dexterity"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_creation_name" />
@@ -32,6 +39,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
+        android:background="@drawable/wins_curve"
+        android:textColor="@android:color/white"
+        android:padding="5dp"
         android:text="@string/dexterity"
         app:layout_constraintBottom_toTopOf="@+id/textView_creation_intelligence"
         app:layout_constraintStart_toStartOf="parent"
@@ -42,6 +52,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
+        android:background="@drawable/wins_curve"
+        android:textColor="@android:color/white"
+        android:padding="5dp"
         android:text="@string/intelligence"
         app:layout_constraintBottom_toTopOf="@+id/textView_creation_luck"
         app:layout_constraintStart_toStartOf="parent"
@@ -51,9 +64,12 @@
         android:id="@+id/textView_creation_luck"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/wins_curve"
+        android:textColor="@android:color/white"
+        android:padding="5dp"
         android:layout_marginStart="32dp"
         android:text="@string/luck"
-        app:layout_constraintBottom_toTopOf="@+id/button_creation_backToMain"
+        app:layout_constraintBottom_toTopOf="@+id/button_creation_finish"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_creation_intelligence" />
 
@@ -62,8 +78,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
+        android:background="@drawable/edit_text_colors"
         android:ems="10"
+        android:hint="@string/str"
         android:inputType="number"
+        android:padding="5dp"
+        android:textColor="@android:color/white"
+        android:textColorHint="@android:color/white"
         app:layout_constraintBottom_toTopOf="@+id/editText_creation_dexterity"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/editText_creation_name" />
@@ -73,8 +94,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
+        android:background="@drawable/edit_text_colors"
         android:ems="10"
+        android:hint="@string/dex"
         android:inputType="number"
+        android:padding="5dp"
+        android:textColor="@android:color/white"
+        android:textColorHint="@android:color/white"
         app:layout_constraintBottom_toTopOf="@+id/editText_creation_intelligence"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/editText_creation_strength" />
@@ -84,8 +110,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
+        android:background="@drawable/edit_text_colors"
         android:ems="10"
+        android:hint="@string/inte"
         android:inputType="number"
+        android:padding="5dp"
+        android:textColor="@android:color/white"
+        android:textColorHint="@android:color/white"
         app:layout_constraintBottom_toTopOf="@+id/editText_creation_luck"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/editText_creation_dexterity" />
@@ -95,8 +126,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
+        android:background="@drawable/edit_text_colors"
         android:ems="10"
+        android:hint="@string/luk"
         android:inputType="number"
+        android:padding="5dp"
+        android:textColor="@android:color/white"
+        android:textColorHint="@android:color/white"
         app:layout_constraintBottom_toTopOf="@+id/button_creation_finish"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/editText_creation_intelligence" />
@@ -114,20 +150,11 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:text="@string/createCharacter"
+        android:padding="10dp"
+        android:background="@drawable/button_curve"
+        android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/button_creation_backToMain" />
-
-    <Button
-        android:id="@+id/button_creation_backToMain"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:text="@string/backToMain"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/button_creation_finish"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.constraintlayout.widget.Guideline
@@ -135,15 +162,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="100dp" />
+        app:layout_constraintGuide_begin="138dp" />
 
     <TextView
         android:id="@+id/textView_creation_warning"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/small_text_colors"
+        android:padding="5dp"
         android:text="@string/limit"
-        app:layout_constraintBottom_toTopOf="@+id/guideline2"
+        android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_creation_title" />
 
@@ -153,17 +184,25 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:text="@string/name"
+        android:background="@drawable/wins_curve"
+        android:textColor="@android:color/white"
+        android:padding="5dp"
         app:layout_constraintBottom_toTopOf="@+id/textView_creation_strength"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_creation_title" />
+        app:layout_constraintTop_toTopOf="@+id/guideline2" />
 
     <EditText
         android:id="@+id/editText_creation_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
+        android:background="@drawable/edit_text_colors"
         android:ems="10"
+        android:hint="@string/username"
         android:inputType="textPersonName"
+        android:padding="5dp"
+        android:textColor="@android:color/white"
+        android:textColorHint="@android:color/white"
         app:layout_constraintBottom_toTopOf="@+id/editText_creation_strength"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/textView_creation_warning" />
