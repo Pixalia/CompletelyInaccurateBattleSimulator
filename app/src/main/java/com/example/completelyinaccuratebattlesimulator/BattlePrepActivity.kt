@@ -17,7 +17,6 @@ class BattlePrepActivity : AppCompatActivity() {
     companion object{
         val TAG = "BattlePrepActivity"
         val ENEMY_ID = "number"
-        val BATTLE_TYPE = "battleType"
     }
 
     val userId = Backendless.UserService.CurrentUser().userId

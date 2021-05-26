@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:clipOrientation="vertical"
+    android:background="@drawable/backgrounda"
     tools:context=".BattleActivity">
 
     <ImageView
@@ -42,13 +43,31 @@
     <TextView
         android:id="@+id/textView_battle_log3"
         android:layout_width="0dp"
+        android:background="@drawable/edit_text_colors"
+        android:padding="5dp"
         android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
         android:layout_marginStart="60dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="60dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_battle_log2" />
+
+    <TextView
+        android:id="@+id/textView_battle_log4"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:background="@drawable/edit_text_colors"
+        android:padding="5dp"
+        android:textColor="@android:color/white"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="60dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_battle_log3" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline8"
@@ -63,6 +82,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="150dp"
         android:layout_marginEnd="40dp"
+        android:background="@drawable/image_border"
         app:layout_constraintEnd_toStartOf="@+id/guideline8"
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
@@ -72,6 +92,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
+        android:background="@drawable/image_border"
         android:layout_marginTop="150dp"
         app:layout_constraintStart_toStartOf="@+id/guideline8"
         app:layout_constraintTop_toTopOf="parent"
@@ -83,7 +104,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:text="@string/battleLogTitle"
+        android:background="@drawable/button_curve"
+        android:padding="10dp"
         android:textSize="25dp"
+        android:textColor="@android:color/white"
         app:layout_constraintEnd_toStartOf="@+id/imageView_battle_rightVine"
         app:layout_constraintStart_toEndOf="@+id/imageView_battle_leftVine"
         app:layout_constraintTop_toTopOf="@+id/guideline7" />
@@ -101,6 +125,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="60dp"
         android:layout_marginTop="24dp"
+        android:background="@drawable/edit_text_colors"
+        android:padding="5dp"
+        android:textColor="@android:color/white"
         android:layout_marginEnd="60dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -112,6 +139,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="60dp"
         android:layout_marginTop="24dp"
+        android:background="@drawable/edit_text_colors"
+        android:padding="5dp"
+        android:textColor="@android:color/white"
         android:layout_marginEnd="60dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"

@@ -27,14 +27,7 @@ class BattleActivity : AppCompatActivity() {
     private val userId = Backendless.UserService.CurrentUser().userId
     private var userHealth = 50
     private var foeHealth = 50
-    private var foeDodge = 0
-    private var userDodge = 0
     private var currentTurn = 1
-    var enemyStatTotal : Int = 0
-    var userStatTotal : Int = 0
-    var upHillBattle : Boolean = false
-    var equalBattle : Boolean = false
-    var advantageBattle : Boolean = false
     var musicPlayer : MediaPlayer? = null
 
     companion object{
@@ -44,7 +37,6 @@ class BattleActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_battle)
-        textView_battle_header.setTextColor(Color.BLACK)
 
         foeId = intent.getStringExtra(BattlePrepActivity.ENEMY_ID)
 
@@ -66,9 +58,6 @@ class BattleActivity : AppCompatActivity() {
                 if (response != null){
                     val itemFoe = response.elementAt(0)
                     if (itemFoe != null){
-                        //foeDodge = itemFoe.dex
-
-                        val enemyStatTotal = itemFoe.str + itemFoe.dex + itemFoe.int + itemFoe.luk
 
                         if (itemFoe.str > itemFoe.dex && itemFoe.str > itemFoe.int && itemFoe.str > itemFoe.luk){
                             imageView_battle_foeAvatar.setImageResource(R.drawable.bluheavy)
@@ -108,9 +97,6 @@ class BattleActivity : AppCompatActivity() {
                     val itemUser = response.elementAt(0)
 
                     if (itemUser != null){
-                        userDodge = itemUser.dex
-
-                        userStatTotal = itemUser.str + itemUser.dex + itemUser.int + itemUser.luk
 
                         if (itemUser.str > itemUser.dex && itemUser.str > itemUser.int && itemUser.str > itemUser.luk){
                             imageView_battle_avatar.setImageResource(R.drawable.redheavy)
@@ -132,38 +118,26 @@ class BattleActivity : AppCompatActivity() {
             }
         })
 
-        foeId = intent.getStringExtra(BattlePrepActivity.ENEMY_ID)
 
+        val battleRandom = (0..2).random()
 
-        var layout = RelativeLayout(this@BattleActivity)
-
-        if (userStatTotal > (enemyStatTotal + 5)){
-            advantageBattle = true
-            layout.background = ContextCompat.getDrawable(this, R.drawable.backgroundc)
+        if (battleRandom == 0){
             musicPlayer = MediaPlayer.create(this, R.raw.easybattle)
             musicPlayer!!.isLooping = true
             musicPlayer!!.start()
-
-            calculateFirstTurn()
         }
-        else if ((userStatTotal) + 5 < enemyStatTotal){
-            upHillBattle = true
-            layout.background = ContextCompat.getDrawable(this, R.drawable.backgroundb)
+        if (battleRandom == 1){
             musicPlayer = MediaPlayer.create(this, R.raw.uphillbattle)
             musicPlayer!!.isLooping = true
             musicPlayer!!.start()
-
-            calculateFirstTurn()
         }
-        else {
-            equalBattle = true
-            layout.background = ContextCompat.getDrawable(this, R.drawable.backgrounda)
+        if (battleRandom == 2) {
             musicPlayer = MediaPlayer.create(this, R.raw.regularbattle)
             musicPlayer!!.isLooping = true
             musicPlayer!!.start()
-
-            calculateFirstTurn()
         }
+
+        calculateFirstTurn()
 
 
 
@@ -211,9 +185,9 @@ class BattleActivity : AppCompatActivity() {
 
                     if (item != null){
 
-                        val hitChance = (item.int + (0..20).random())
-                        val foeDodgeChance = (foeDodge + (0..20).random())
-                        var damage = (item.str + (0..(item.str/2)).random()) + 1
+                        val hitChance = (item.int + (0..20).random()) + item.dex/2
+                        val foeDodgeChance = (1 + (0..20).random()) - item.dex/4
+                        var damage = (item.str + (0..(item.str/2)).random()) + 1 + item.dex/2
                         val critChance = (0..100).random()
 
                         if (critChance < (5 + item.luk)){
@@ -224,6 +198,7 @@ class BattleActivity : AppCompatActivity() {
                             if (critTrue){
                                 damage *= 2
                                 foeHealth -= damage
+                                textView_battle_log4.text = textView_battle_log3.text
                                 textView_battle_log3.text = textView_battle_log2.text
                                 textView_battle_log2.text = textView_battle_log1.text
                                 textView_battle_log1.text = "Turn ${currentTurn}: Critical! '${item.name}' dealt '$damage' damage!"
@@ -273,6 +248,7 @@ class BattleActivity : AppCompatActivity() {
                             }
                             else{
                                 foeHealth -= damage
+                                textView_battle_log4.text = textView_battle_log3.text
                                 textView_battle_log3.text = textView_battle_log2.text
                                 textView_battle_log2.text = textView_battle_log1.text
                                 textView_battle_log1.text = "Turn ${currentTurn}: '${item.name}' dealt '$damage' damage."
@@ -321,6 +297,7 @@ class BattleActivity : AppCompatActivity() {
                             }
                         }
                         else {
+                            textView_battle_log4.text = textView_battle_log3.text
                             textView_battle_log3.text = textView_battle_log2.text
                             textView_battle_log2.text = textView_battle_log1.text
                             textView_battle_log1.text = "Turn ${currentTurn}: You missed!"
@@ -359,9 +336,9 @@ class BattleActivity : AppCompatActivity() {
 
                     if (item != null){
 
-                        val hitChance = (item.int + (0..20).random())
-                        val userDodgeChance = (userDodge + (0..20).random())
-                        var damage = (item.str + (0..(item.str/2)).random()) + 1
+                        val hitChance = (item.int + (0..20).random()) + item.dex/2
+                        val userDodgeChance = (1 + (0..20).random()) - item.dex/4
+                        var damage = (item.str + (0..(item.str/2)).random()) + 1 + item.dex/2
                         val critChance = (0..100).random()
 
                         if (critChance < (5 + item.luk)){
@@ -372,6 +349,7 @@ class BattleActivity : AppCompatActivity() {
                             if (critTrue){
                                 damage *= 2
                                 userHealth -= damage
+                                textView_battle_log4.text = textView_battle_log3.text
                                 textView_battle_log3.text = textView_battle_log2.text
                                 textView_battle_log2.text = textView_battle_log1.text
                                 textView_battle_log1.text = "Turn ${currentTurn}: Critical! '${item.name}' dealt '$damage' damage!"
@@ -420,6 +398,7 @@ class BattleActivity : AppCompatActivity() {
                             }
                             else{
                                 userHealth -= damage
+                                textView_battle_log4.text = textView_battle_log3.text
                                 textView_battle_log3.text = textView_battle_log2.text
                                 textView_battle_log2.text = textView_battle_log1.text
                                 textView_battle_log1.text = "Turn ${currentTurn}: '${item.name}' dealt '$damage' damage."
@@ -468,6 +447,7 @@ class BattleActivity : AppCompatActivity() {
                             }
                         }
                         else {
+                            textView_battle_log4.text = textView_battle_log3.text
                             textView_battle_log3.text = textView_battle_log2.text
                             textView_battle_log2.text = textView_battle_log1.text
                             textView_battle_log1.text = "Turn ${currentTurn}: The enemy missed!"
@@ -487,6 +467,7 @@ class BattleActivity : AppCompatActivity() {
     }
 
     fun userVictory(){
+        textView_battle_log4.text = textView_battle_log3.text
         textView_battle_log3.text = textView_battle_log2.text
         textView_battle_log2.text = textView_battle_log1.text
         textView_battle_log1.text = "Player wins!"
@@ -538,6 +519,7 @@ class BattleActivity : AppCompatActivity() {
     }
 
     fun foeVictory(){
+        textView_battle_log4.text = textView_battle_log3.text
         textView_battle_log3.text = textView_battle_log2.text
         textView_battle_log2.text = textView_battle_log1.text
         textView_battle_log1.text = "Foe wins!"

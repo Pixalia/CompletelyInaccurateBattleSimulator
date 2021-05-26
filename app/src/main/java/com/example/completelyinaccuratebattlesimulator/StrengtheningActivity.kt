@@ -1,6 +1,7 @@
 package com.example.completelyinaccuratebattlesimulator
 
 import android.content.Intent
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -28,6 +29,11 @@ class StrengtheningActivity : AppCompatActivity() {
         setContentView(R.layout.activity_strengthening)
 
         generateQuote()
+
+        /*imageView_strength_luck.setColorFilter(Color.argb(200, 208, 128, 255))
+        imageView_strength_intelligence.setColorFilter(Color.argb(200, 208, 128, 255))
+        imageView_strength_dexterity.setColorFilter(Color.argb(200, 208, 128, 255))
+        imageView_strength_strength.setColorFilter(Color.argb(200, 208, 128, 255))*/
 
         imageView_strength_strength.setOnClickListener {
             textView_strength_current.text = "Currently Selected: Strength"
@@ -159,8 +165,23 @@ class StrengtheningActivity : AppCompatActivity() {
                     }
                 }
                 else{
-                    Toast.makeText(this@StrengtheningActivity, "No stat has been increased.", Toast.LENGTH_SHORT).show()
-                    finishingUp()
+                    if (response?.elementAt(0) != null) {
+
+                        val curCharacter = response.elementAt(0)
+                        curCharacter!!.winStreak = 0
+
+                        Backendless.Data.of(Character::class.java).save(curCharacter, object: AsyncCallback<Character>{
+                            override fun handleFault(fault: BackendlessFault?) {
+                                Log.d(StrengtheningActivity.TAG, "handleFault : ${fault?.detail}")
+                            }
+
+                            override fun handleResponse(response: Character?) {
+                                Toast.makeText(this@StrengtheningActivity, "No stat has been increased.", Toast.LENGTH_SHORT).show()
+                                finishingUp()
+                            }
+
+                        })
+                    }
                 }
 
             }
