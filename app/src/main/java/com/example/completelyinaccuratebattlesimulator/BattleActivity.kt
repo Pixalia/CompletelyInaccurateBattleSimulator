@@ -48,7 +48,7 @@ class BattleActivity : AppCompatActivity() {
         textView_battle_log2.text = ""
         textView_battle_log3.text = ""
 
-        // get foe's dex for later usage
+
         Backendless.Data.of(Character::class.java).find(queryBuilderFoe, object : AsyncCallback<List<Character?>?> {
             override fun handleFault(fault: BackendlessFault?) {
                 Log.d(BattleActivity.TAG, "handleFault : ${fault?.detail}")
@@ -82,7 +82,6 @@ class BattleActivity : AppCompatActivity() {
         })
 
 
-        // gets user's dex for later usage
         val whereClauseUser = "ownerId = '$userId'"
         val queryBuilderUser = DataQueryBuilder.create()
         queryBuilderUser.whereClause = whereClauseUser
@@ -121,19 +120,23 @@ class BattleActivity : AppCompatActivity() {
 
         val battleRandom = (0..2).random()
 
+
         if (battleRandom == 0){
             musicPlayer = MediaPlayer.create(this, R.raw.easybattle)
+            musicPlayer!!.setVolume(100F, 100F)
             musicPlayer!!.isLooping = true
             musicPlayer!!.start()
         }
         if (battleRandom == 1){
             musicPlayer = MediaPlayer.create(this, R.raw.uphillbattle)
+            musicPlayer!!.setVolume(100F, 100F)
             musicPlayer!!.isLooping = true
             musicPlayer!!.start()
         }
         if (battleRandom == 2) {
             musicPlayer = MediaPlayer.create(this, R.raw.regularbattle)
             musicPlayer!!.isLooping = true
+            musicPlayer!!.setVolume(100F, 100F)
             musicPlayer!!.start()
         }
 
@@ -495,6 +498,7 @@ class BattleActivity : AppCompatActivity() {
                                }
                                else{
                                    itemUser.winStreak++
+                                   itemUser.wins++
                                    Backendless.Data.of(Character::class.java).save(itemUser, object: AsyncCallback<Character>{
                                        override fun handleFault(fault: BackendlessFault?) {
                                            Log.d(BattleActivity.TAG, "handleFault : ${fault?.detail}")

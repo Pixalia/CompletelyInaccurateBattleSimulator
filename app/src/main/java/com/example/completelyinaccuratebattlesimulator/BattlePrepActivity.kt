@@ -31,6 +31,7 @@ class BattlePrepActivity : AppCompatActivity() {
 
         kyantaPlayer = MediaPlayer.create(this, R.raw.kyanta)
         kyantaPlayer!!.isLooping = true
+        kyantaPlayer!!.setVolume(100F, 100F)
         kyantaPlayer!!.start()
 
 

@@ -1,6 +1,7 @@
 package com.example.completelyinaccuratebattlesimulator
 
 import android.content.Intent
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.provider.SyncStateContract
 import android.util.Log
@@ -22,11 +23,18 @@ class LoginActivity : AppCompatActivity() {
         val USER = "user"
     }
 
+    var musicPlayer : MediaPlayer? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
         Backendless.initApp(this, Constants.API_ID, Constants.API_KEY)
+
+        musicPlayer = MediaPlayer.create(this, R.raw.colosseum)
+        musicPlayer!!.isLooping = true
+        musicPlayer!!.setVolume(100F, 100F)
+        musicPlayer!!.start()
 
         button_login_login.setOnClickListener {
 
@@ -91,5 +99,15 @@ class LoginActivity : AppCompatActivity() {
             editText_login_username.setText(createdUsername)
             editText_login_password.setText(createdPassword)
         }
+    }
+
+    override fun onPause(){
+        super.onPause()
+        musicPlayer!!.pause()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        musicPlayer!!.start()
     }
 }

@@ -38,4 +38,8 @@
     <string name="toBattle">To Battle!</string>
     <string name="retreat">The hour to retreat has passed. Victory belongs solely to those willing to take risks.</string>
     <string name="battleLogTitle"><b>Battle Log</b></string>
+    <string name="leaderboardTitle"><b>Leaderboard</b></string>
+    <string name="footer"><i>May the valor of the strong be recorded for time eternal</i></string>
+    <string name="ranking">Ranking item</string>
+    <string name="initalRanking">-1</string>
 </resources>

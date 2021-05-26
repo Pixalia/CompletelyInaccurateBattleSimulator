@@ -42,16 +42,16 @@ class CreationActivity : AppCompatActivity() {
         if (editText_creation_name.text.isNullOrEmpty()){
             Toast.makeText(this, "Who are you? Name yourself!", Toast.LENGTH_SHORT).show()
         }
-        else if (editText_creation_strength.text.isNullOrEmpty()){
+        else if (editText_creation_strength.text.isNullOrEmpty() || editText_creation_strength.text.toString().toInt() < 0){
             Toast.makeText(this, "What a weakling! Give yourself some strength!", Toast.LENGTH_SHORT).show()
         }
-        else if (editText_creation_dexterity.text.isNullOrEmpty()){
+        else if (editText_creation_dexterity.text.isNullOrEmpty() || editText_creation_dexterity.text.toString().toInt() < 0){
             Toast.makeText(this, "How clumsy! Give yourself some dexterity!", Toast.LENGTH_SHORT).show()
         }
-        else if (editText_creation_intelligence.text.isNullOrEmpty()){
+        else if (editText_creation_intelligence.text.isNullOrEmpty() || editText_creation_intelligence.text.toString().toInt() < 0){
             Toast.makeText(this, "What a fool! Give yourself some intelligence!", Toast.LENGTH_SHORT).show()
         }
-        else if (editText_creation_luck.text.isNullOrEmpty()){
+        else if (editText_creation_luck.text.isNullOrEmpty() || editText_creation_luck.text.toString().toInt() < 0){
                 Toast.makeText(this, "How unlucky! Give yourself some luck!", Toast.LENGTH_SHORT).show()
         }
         else{

@@ -85,6 +85,7 @@ class StrengtheningActivity : AppCompatActivity() {
                         val curCharacter = response.elementAt(0)
                         val newStr = curCharacter!!.str + 1
                         curCharacter.str = newStr
+                        curCharacter.wins++
                         curCharacter.winStreak = 0
 
                         Backendless.Data.of(Character::class.java).save(curCharacter, object: AsyncCallback<Character>{
@@ -106,6 +107,7 @@ class StrengtheningActivity : AppCompatActivity() {
                         val curCharacter = response.elementAt(0)
                         val newStr = curCharacter!!.dex + 1
                         curCharacter.dex = newStr
+                        curCharacter.wins++
                         curCharacter.winStreak = 0
 
                         Backendless.Data.of(Character::class.java).save(curCharacter, object: AsyncCallback<Character>{
@@ -128,6 +130,7 @@ class StrengtheningActivity : AppCompatActivity() {
                         val curCharacter = response.elementAt(0)
                         val newStr = curCharacter!!.int + 1
                         curCharacter.int = newStr
+                        curCharacter.wins++
                         curCharacter.winStreak = 0
 
                         Backendless.Data.of(Character::class.java).save(curCharacter, object: AsyncCallback<Character>{
@@ -149,6 +152,7 @@ class StrengtheningActivity : AppCompatActivity() {
                         val curCharacter = response.elementAt(0)
                         val newStr = curCharacter!!.luk + 1
                         curCharacter.luk = newStr
+                        curCharacter.wins++
                         curCharacter.winStreak = 0
 
                         Backendless.Data.of(Character::class.java).save(curCharacter, object: AsyncCallback<Character>{
@@ -169,6 +173,7 @@ class StrengtheningActivity : AppCompatActivity() {
 
                         val curCharacter = response.elementAt(0)
                         curCharacter!!.winStreak = 0
+                        curCharacter.wins++
 
                         Backendless.Data.of(Character::class.java).save(curCharacter, object: AsyncCallback<Character>{
                             override fun handleFault(fault: BackendlessFault?) {
